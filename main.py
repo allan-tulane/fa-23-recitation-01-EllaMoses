@@ -20,6 +20,24 @@ def binary_search(mylist, key):
 	return _binary_search(mylist, key, 0, len(mylist)-1)
 
 def _binary_search(mylist, key, left, right):
+	if len(mylist) == 0: #base case, empty list does not contain element so return -1
+		return -1
+	if mylist[left] > key: #if the key is smaller than the smallest element in list, it is not in the list so return -1
+		return -1
+	if mylist[right] < key: #if the key is greater than the largest element in list, it is not in the list so return -1
+		return -1
+	if len(mylist) == 1: #base case if list is size 1, if the element matches it is in the list at index 0, if it doesn't match it is not in the list
+		if key == mylist[0]:
+			return 0
+		else:
+			return -1
+	middle = mylist[right//2] #center index
+	if key == middle: # if the key is equal to the center index it is found in the list at that postion
+		return right//2
+	elif key < middle: #recursive call for key smaller than middle element
+		return binary_search(mylist[0:right//2],key)
+	else: #recursive call for key larger than middle element, must add 1+right//2 to account for the indices to the left of the middle element we are diving on
+		return 1 + right//2 + binary_search(mylist[1 + (right//2):], key)
 	"""
 	Recursive implementation of binary search.
 
