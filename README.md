@@ -53,7 +53,15 @@ We'll compare the running times of `linear_search` and `binary_search` empirical
 
 - [ ] 8. Call `print_results(compare_search())` and paste the results here:
 
-**TODO: add your timing results here**
+            |            n |   linear |   binary |
+            |--------------|----------|----------|
+            |       10.000 |    0.004 |    0.002 |
+            |      100.000 |    0.006 |    0.000 |
+            |     1000.000 |    0.071 |    0.001 |
+            |    10000.000 |    0.739 |    0.001 |
+            |   100000.000 |    7.416 |    0.004 |
+            |  1000000.000 |   80.221 |    0.013 |
+            | 10000000.000 | 1111.129 |    0.006 |  
 
 - [ ] 9. The theoretical worst-case running time of linear search is $O(n)$ and binary search is $O(log_2(n))$. Do these theoretical running times match your empirical results? Why or why not?
 

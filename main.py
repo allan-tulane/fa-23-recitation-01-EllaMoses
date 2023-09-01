@@ -20,6 +20,18 @@ def binary_search(mylist, key):
 	return _binary_search(mylist, key, 0, len(mylist)-1)
 
 def _binary_search(mylist, key, left, right):
+	"""
+	Recursive implementation of binary search.
+
+	Params:
+	  mylist....list to search
+	  key.......search key
+	  left......left index into list to search
+	  right.....right index into list to search
+
+	Returns:
+	  index of key in mylist, or -1 if not present.
+	"""
 	if len(mylist) == 0: #base case, empty list does not contain element so return -1
 		return -1
 	if mylist[left] > key: #if the key is smaller than the smallest element in list, it is not in the list so return -1
@@ -38,22 +50,6 @@ def _binary_search(mylist, key, left, right):
 		return binary_search(mylist[0:right//2],key)
 	else: #recursive call for key larger than middle element, must add 1+right//2 to account for the indices to the left of the middle element we are diving on
 		return 1 + right//2 + binary_search(mylist[1 + (right//2):], key)
-	"""
-	Recursive implementation of binary search.
-
-	Params:
-	  mylist....list to search
-	  key.......search key
-	  left......left index into list to search
-	  right.....right index into list to search
-
-	Returns:
-	  index of key in mylist, or -1 if not present.
-	"""
-	### TODO
-
-	###
-
 
 
 
@@ -76,6 +72,10 @@ def time_search(search_fn, mylist, key):
 	  search function on this input.
 	"""
 	### TODO
+	time1 = time.time() * 1000
+	search_fn(mylist, key)
+	time2 = time.time() * 1000
+	return time2-time1
 
 	###
 
@@ -94,9 +94,18 @@ def compare_search(sizes=[1e1, 1e2, 1e3, 1e4, 1e5, 1e6, 1e7]):
 	  indicating the number of milliseconds it takes
 	  for each method to run on each value of n
 	"""
-	### TODO
-
-	###
+	linear_times = []
+	binary_times = []
+	for i in sizes:
+		mylist= []
+		n = 0
+		while n < i:
+			mylist.append(n)
+			n+=1
+		linear_times.append(time_search(linear_search, mylist, -1))
+		binary_times.append(time_search(binary_search, mylist, -1))
+	
+	return(list(zip(sizes, linear_times, binary_times)))
 
 def print_results(results):
 	""" done """
@@ -104,4 +113,6 @@ def print_results(results):
 							headers=['n', 'linear', 'binary'],
 							floatfmt=".3f",
 							tablefmt="github"))
+	
+print_results(compare_search())
 
