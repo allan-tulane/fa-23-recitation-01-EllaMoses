@@ -1,7 +1,7 @@
 [![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-718a45dd9cf7e7f842a935f5ebbe5719a5e09af4491e668f4dbf3b35d5cca122.svg)](https://classroom.github.com/online_ide?assignment_repo_id=11680990&assignment_repo_type=AssignmentRepo)
 # CMPS 2200  Recitation 01
 
-**Name (Team Member 1):**_________________________  
+**Name (Team Member 1):** Ella Moses  
 **Name (Team Member 2):**_________________________
 
 In this recitation, we will investigate asymptotic complexity. Additionally, we will get familiar with the various technologies we'll use for collaborative coding.
@@ -40,11 +40,12 @@ We'll compare the running times of `linear_search` and `binary_search` empirical
 
 - [ ] 4. Describe the worst case input value of `key` for `linear_search`? for `binary_search`? 
 
-          The worst case input value of 'key' for linear search in a list of size n is a value not in the list. This is because the algorithm searches all elements from left to right until it finds the value, so it will search all n elements before determining that the key is not found. The worst case input value of 'key' for binary search is the smallest or largest value. This is because the algorithm starts with the middle element and continues dividing the list and checking the middle element, so the first or last element will only be checked if they are the only elements remaining, which means the maximum number of recursion steps have taken place. 
+          The worst case input value of 'key' for linear search in a list of size n is a value not in the list. This is because the algorithm searches all elements from left to right until it finds the value, so it will search all n elements before determining that the key is not found. The worst case input value of 'key' for binary search is a value not in the list. This is because the algorithm starts with the middle element and continues dividing the list and checking the middle element, until the list reaches size 0. This means that the maximum
+          number of comparisons are performed when the value is not found in the list. 
 
 - [ ] 5. Describe the best case input value of `key` for `linear_search`? for `binary_search`? 
 
-          The best case input value of 'key' for linear search in a list of size n is the leftmost value in the list. This is because the algorithm searches all elements from left to right until it finds the value, so it will stop the search after the first element. The best case input value of 'key' for binary search is the center value. This is because the algorithm starts with the middle element and continues dividing the list and checking the middle element, so the algorithm will stop after the first comparison if the key is equal to the value in the center of the list. 
+          The best case input value of 'key' for linear search in a list of size n is the leftmost value in the list. This is because the algorithm searches all elements from left to right until it finds the value, so it will stop the search after the first element. The best case input value of 'key' for binary search is the center value ((left+right) // 2). This is because the algorithm starts with the middle element and continues dividing the list and checking the middle element, so the algorithm will stop after the first comparison if the key is equal to the value in the center of the list. 
 
 
 - [ ] 6. Complete the `time_search` function to compute the running time of a search function. Note that this is an example of a "higher order" function, since one of its parameters is another function.
@@ -52,26 +53,26 @@ We'll compare the running times of `linear_search` and `binary_search` empirical
 - [ ] 7. Complete the `compare_search` function to compare the running times of linear search and binary search. Confirm the implementation by running `pytest main.py::test_compare_search`, which contains some simple checks.
 
 - [ ] 8. Call `print_results(compare_search())` and paste the results here:
-
+ 
             |            n |   linear |   binary |
             |--------------|----------|----------|
-            |       10.000 |    0.004 |    0.002 |
-            |      100.000 |    0.006 |    0.000 |
-            |     1000.000 |    0.071 |    0.001 |
-            |    10000.000 |    0.739 |    0.001 |
-            |   100000.000 |    7.416 |    0.004 |
-            |  1000000.000 |   80.221 |    0.013 |
-            | 10000000.000 | 1111.129 |    0.006 |  
+            |       10.000 |    0.006 |    0.007 |
+            |      100.000 |    0.006 |    0.005 |
+            |     1000.000 |    0.072 |    0.009 |
+            |    10000.000 |    0.752 |    0.009 |
+            |   100000.000 |    7.640 |    0.025 |
+            |  1000000.000 |   80.373 |    0.093 |
+            | 10000000.000 |  836.333 |    0.052 |
 
 - [ ] 9. The theoretical worst-case running time of linear search is $O(n)$ and binary search is $O(log_2(n))$. Do these theoretical running times match your empirical results? Why or why not?
 
-            The runtime of linear search increases at an approximately linear rate. As n increases by a factor of 10, the runtime appriximately increases by a factor of 10, except for when n increases from 10.000
-            to 100.000 and from 1000000.000 to 10000000.000. It is not perfectly linear, but it is continously increasing at a similar rate. The binary search runtimes do not match the worst-case runtime. The time complexity decreases, then increases and remains constant before increasing and decreasing again. If it matched, the worst-case runtime, it would be continously increasing until it was eventually inreasing at a very small rate. 
+            The runtime of linear search increases at an approximately linear rate. As n increases by a factor of 10, the runtime appriximately increases by a factor of 10, except for when n increases from 10
+            to 100. It is not perfectly linear, but it is continously increasing at a similar rate. The binary search runtimes do not match the worst-case runtime. The time complexity decreases, then increases and remains constant before increasing and decreasing again. If it matched, the worst-case runtime, it would be continously increasing until it was eventually inreasing at a very small rate. 
 
 - [ ] 10. Binary search assumes the input list is already sorted. Assume it takes $\Theta(n^2)$ time to sort a list of length $n$. Suppose you know ahead of time that you will search the same list $k$ times. 
   + What is worst-case complexity of searching a list of $n$ elements $k$ times using linear search? 
-             $O(n*k)$
+             k * $O(n)$
   + For binary search? 
-            $\Theta(n^2)$ + $O(k*log_2(n))$
+            $\Theta(n^2)$ + k*$O(log_2(n))$
   + For what values of $k$ is it more efficient to first sort and then use binary search versus just using linear search without sorting?
             it is more efficient to sort and perform binary search when k is greater than (n^2)/(n-log_2(n))
