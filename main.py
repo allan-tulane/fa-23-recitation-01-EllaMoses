@@ -32,18 +32,15 @@ def _binary_search(mylist, key, left, right):
 	Returns:
 	  index of key in mylist, or -1 if not present.
 	"""
-
-	if len(mylist) == 0: #base case, empty list does not contain element so return -1
-		return -1
-	middle = int((left+right)/2) #center index
+	middle = (left+right)//2 #center index
 	if key == mylist[middle]: # if the key is equal to the center index it is found in the list at that postion
 		return middle
-	elif right <= left: 
+	elif right <= left: #base case to end recursion 
 		return -1
 	else:
-		if mylist[middle] > key: #recursive call for key smaller than middle element
+		if mylist[middle] > key: #recursive call for key smaller than middle element, left stays the same right changes to one less than middle so it isn't searched twice
 			return _binary_search(mylist, key, left, middle-1)
-		elif mylist[middle] < key: #recursive call for key larger than middle element
+		elif mylist[middle] < key: #recursive call for key larger than middle element, right stays the same and left changes to one plus middle so it isn't searched twice
 			return _binary_search(mylist, key, middle + 1, right)
 
 
@@ -66,10 +63,10 @@ def time_search(search_fn, mylist, key):
 	  search function on this input.
 	"""
 	### TODO
-	time1 = time.time() * 1000
+	time1 = time.time()
 	search_fn(mylist, key)
-	time2 = time.time() * 1000
-	return time2-time1
+	time2 = time.time()
+	return (time2-time1) * 1000
 
 	###
 
